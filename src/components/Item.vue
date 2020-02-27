@@ -6,7 +6,7 @@
         <b-card-text>${{ price|dollars }}</b-card-text>
       </b-card-body>
       <div class="text-right">
-        <b-button variant="primary" size="sm">Add to cart</b-button>
+        <b-button variant="primary" size="sm" @click="addToCart(invId)">Add to cart</b-button>
       </div>
     </b-card>
   </b-col>
@@ -18,6 +18,11 @@ export default {
   props: ["name", "price", "image", "invId"],
   filters: {
     dollars: num => `$${num / 100}`
+  },
+  methods: {
+    addToCart(invId) {
+      return this.$store.dispatch("addToCart", invId);
+    }
   }
 };
 </script>
