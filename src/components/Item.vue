@@ -3,7 +3,7 @@
     <b-card :img-src="image" img-top>
       <b-card-body>
         <b-card-title>{{ name }}</b-card-title>
-        <b-card-text>${{ price|dollars }}</b-card-text>
+        <b-card-text>{{ price|dollars }}</b-card-text>
       </b-card-body>
       <div class="text-right">
         <b-button variant="primary" size="sm" @click="addToCart(invId)">Add to cart</b-button>
@@ -19,6 +19,7 @@ export default {
   name: "Item",
   props: ["name", "price", "image", "invId"],
   filters: {
+    // dollars: function(num){return `$${num/100}`}
     dollars: num => `$${num / 100}`
   },
   methods: {
