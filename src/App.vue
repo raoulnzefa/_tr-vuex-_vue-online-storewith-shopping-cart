@@ -4,21 +4,22 @@
 
     <b-container>
       <b-row>
-        <b-col md="3" v-for="(item, i) in forSale" :key="i">
-          <b-card :img-src="item.image" img-top>
-            <b-card-title>{{ item.name }}</b-card-title>
-            <b-card-text>${{ item.price/100 }}</b-card-text>
-            <div class="text-right">
-              <b-button variant="primary" size="sm">Add to card</b-button>
-            </div>
-          </b-card>
-        </b-col>
+        <item
+          v-for="item in forSale"
+          :key="item.invId"
+          :invId="item.invId"
+          :name="item.name"
+          :price="item.price"
+          :image="item.image"
+        />
       </b-row>
     </b-container>
   </b-container>
 </template>
 
 <script>
+import Item from "@/components/Item";
+
 export default {
   name: "app",
   data() {
@@ -35,7 +36,8 @@ export default {
         }
       ]
     };
-  }
+  },
+  components: { Item, }
 };
 </script>
 
