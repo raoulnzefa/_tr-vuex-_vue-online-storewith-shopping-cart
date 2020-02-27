@@ -6,7 +6,7 @@
         <b-row>Shopping cart items will go here.</b-row>
         <b-row class="mt-3">
           <b-table striped hover :items="cart" :fields="fields">
-            <template v-slot:cell(price)="data">${{ data.item.price }}</template>
+            <template v-slot:cell(price)="data">{{ data.item.price|dollars }}</template>
           </b-table>
         </b-row>
       </b-container>
@@ -20,6 +20,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { dollars } from '@/filters';
 
 export default {
   name: "ShoppingCart",
@@ -37,6 +38,9 @@ export default {
         }
       ]
     };
+  },
+  filters:{
+    dollars
   },
   computed: {
     ...mapGetters(["inCart", "forSale"]),

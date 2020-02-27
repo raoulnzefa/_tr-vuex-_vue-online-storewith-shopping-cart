@@ -14,13 +14,13 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { dollars } from '@/filters';
 
 export default {
   name: "Item",
   props: ["name", "price", "image", "invId"],
   filters: {
-    // dollars: function(num){return `$${num/100}`}
-    dollars: num => `$${num / 100}`
+    dollars
   },
   methods: {
     // addToCart(invId) {
