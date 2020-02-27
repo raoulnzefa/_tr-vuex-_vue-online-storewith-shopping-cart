@@ -2,20 +2,24 @@
   <div>
     <b-button variant="primary" size="sm" @click="isShowModal=true">Cart ({{ inCart.length }})</b-button>
     <b-modal v-model="isShowModal" id="shoppingCart" title="Shopping cart">
-      <b-container>
-        <b-row>Shopping cart items will go here.</b-row>
-        <b-row class="mt-3">
+      <b-row>
+        <b-col>Shopping cart items will go here.</b-col>
+      </b-row>
+      <b-row class="mt-3">
+        <b-col>
           <b-table striped hover :items="cart" :fields="fields">
             <template v-slot:cell(price)="data">{{ data.item.price|dollars }}</template>
             <template v-slot:cell(danger)="data">
               <b-button variant="danger" size="sm" @click="removeFromCart(data.index)">&times;</b-button>
             </template>
           </b-table>
-          <b-col>
-            <h2 class="text-right" v-if="total!=0">{{ total|dollars }}</h2>
-          </b-col>
-        </b-row>
-      </b-container>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col class="text-right">
+          <h2 v-if="total!=0">{{ total|dollars }}</h2>
+        </b-col>
+      </b-row>
       <template v-slot:modal-footer>
         <b-button variant="secondary" size="sm" @click="isShowModal=false">Keep</b-button>
         <b-button variant="primary" size="sm">Check out</b-button>
