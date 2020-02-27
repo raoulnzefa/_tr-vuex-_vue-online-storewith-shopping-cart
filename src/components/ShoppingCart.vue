@@ -7,7 +7,13 @@
         <b-row class="mt-3">
           <b-table striped hover :items="cart" :fields="fields">
             <template v-slot:cell(price)="data">{{ data.item.price|dollars }}</template>
+            <template v-slot:cell(danger)="data">
+              <b-button variant="danger" size="sm" @click="removeFromCart(data.index)">&times;</b-button>
+            </template>
           </b-table>
+          <b-col>
+            <h2 class="text-right" v-if="total!=0">{{ total|dollars }}</h2>
+          </b-col>
         </b-row>
       </b-container>
       <template v-slot:modal-footer>
@@ -19,8 +25,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { dollars } from '@/filters';
+import { mapGetters, mapActions } from "vuex";
+import { dollars } from "@/filters";
 
 export default {
   name: "ShoppingCart",
@@ -35,11 +41,12 @@ export default {
         {
           key: "price",
           sortable: true
-        }
+        },
+        { key: "danger" }
       ]
     };
   },
-  filters:{
+  filters: {
     dollars
   },
   computed: {
@@ -51,7 +58,13 @@ export default {
           return cartItem === forSaleItem.invId;
         });
       });
+    },
+    total() {
+      return this.cart.reduce((acc, cur) => acc + cur.price, 0);
     }
+  },
+  methods: {
+    ...mapActions(["removeFromCart"])
   }
 };
 </script>
