@@ -1,6 +1,13 @@
 <template>
   <b-container id="app" fluid>
-    <h1 class="my-3">My online store</h1>
+    <b-row class="my-3 align-items-center">
+      <b-col md="9">
+        <h1>My online store</h1>
+      </b-col>
+      <b-col md="3" class="text-center">
+        <shopping-cart />
+      </b-col>
+    </b-row>
 
     <b-container>
       <b-row>
@@ -13,13 +20,13 @@
           :image="item.image"
         />
       </b-row>
-      {{ inCart }}
     </b-container>
   </b-container>
 </template>
 
 <script>
 import Item from "@/components/Item";
+import ShoppingCart from '@/components/ShoppingCart'
 import { mapGetters } from "vuex";
 
 export default {
@@ -27,11 +34,11 @@ export default {
   data() {
     return {};
   },
-  components: { Item },
+  components: { Item, ShoppingCart },
   computed: {
     // forSale() { return this.$store.getters.forSale; }
-    ...mapGetters(["forSale", "inCart"])
-  },
+    ...mapGetters(["forSale"])
+  }
 };
 </script>
 
