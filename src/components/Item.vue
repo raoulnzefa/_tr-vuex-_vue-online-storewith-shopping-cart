@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: "Item",
   props: ["name", "price", "image", "invId"],
@@ -20,9 +22,10 @@ export default {
     dollars: num => `$${num / 100}`
   },
   methods: {
-    addToCart(invId) {
-      return this.$store.dispatch("addToCart", invId);
-    }
+    // addToCart(invId) {
+      // return this.$store.dispatch("addToCart", invId);
+    // }
+    ...mapActions(["addToCart"]),
   }
 };
 </script>
